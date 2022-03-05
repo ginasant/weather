@@ -15,13 +15,15 @@ app.get("/", function(req, res) {
 app.post("/", function(req, res) {
     
     // takes in the zip from the html form, display in // console. Takes in as string, ex. for zip 02139
-        var city = String(req.body.cityInput);
-        console.log(req.body.cityInput);
+        var lat = String(req.body.latInput);
+        console.log(req.body.latInput);
+        var lon = String(req.body.lonInput);
+        console.log(req.body.lonInput);
     
     //build up the URL for the JSON query, API Key is // secret and needs to be obtained by signup 
         const units = "imperial";
-        const apiKey = "9eb0df9a7bbc39854561a6d046f7c8cd";
-        const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city +  "&units=" + units + "&APPID=" + apiKey;
+        const apiKey = "d0f5eca486e7198f459de2dabfad6048";
+        const url = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat + "&lon=" + lon + "&units=" + units + "&APPID="+ apiKey;
     
     // this gets the data from Open WeatherPI
     https.get(url, function(response){
@@ -34,13 +36,14 @@ app.post("/", function(req, res) {
             const city = weatherData.name;
             const humidity = weatherData.main.humidity; 
             const wind = weatherData.wind.speed;
+            const cloudiness = weatherData.clouds.all;
             const weatherDescription = weatherData.weather[0].description;
             const icon = weatherData.weather[0].icon;
             const imageURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
             
             // displays the output of the results
             res.write("<h1> The weather is " + weatherDescription + "<h1>");
-            res.write("<h2>The Temperature in " + city + " " + " is " + temp + " Degrees Fahrenheit. " + humidity + "%" + " " + " is the humidity" + " "+ "and" + " " + wind + " " + "mph" + " " + "is the wind speed.<h2>");
+            res.write("<h2>The Temperature in " + city + " " + " is " + temp + " Degrees Fahrenheit. " + humidity + "%" + " " + " is the humidity" + " "+ "and" + " " + wind + " " + "mph" + " " + "is the wind speed." + " " + cloudiness + "%" + " " + "is the cloudiness.<h2>");
             res.write("<img src=" + imageURL +">");
             res.send();
         });
