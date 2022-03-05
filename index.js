@@ -43,7 +43,9 @@ app.post("/", function(req, res) {
             
             // displays the output of the results
             res.write("<h1> The weather is " + weatherDescription + "<h1>");
-            res.write("<h2>The Temperature in " + city + " " + " is " + temp + " Degrees Fahrenheit. " + humidity + "%" + " " + " is the humidity" + " "+ "and" + " " + wind + " " + "mph" + " " + "is the wind speed." + " " + cloudiness + "%" + " " + "is the cloudiness.<h2>");
+            res.write("<h2>The Temperature in " + city + " " + " is " + temp + " Degrees Fahrenheit.<h2>"); 
+            res.write("<h2>The Humidity is " + humidity + "%" + " " + "and the windspeed is " + wind + " " + "mph.<h2>");
+            res.write("<h2>The Cloudiness is " + cloudiness + "%.<h2>");
             res.write("<img src=" + imageURL +">");
             res.send();
         });
