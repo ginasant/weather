@@ -34,7 +34,7 @@ app.post("/", function(req, res) {
             const cityid= weatherData.id;
             const humidity = weatherData.main.humidity; 
             const wind = weatherData.wind.speed;
-            const winddirection = weatherData.wind.direction;
+            const winddirection = weatherData.wind.deg;
             const cloudiness = weatherData.clouds.all;
             const weatherDescription = weatherData.weather[0].description;
             const icon = weatherData.weather[0].icon;
